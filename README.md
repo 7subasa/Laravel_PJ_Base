@@ -33,6 +33,14 @@
         </code>
 </ol>
 
+## phpMyAdmin
+
+MySQLをWEBから操作できるようになる．
+
+不要であれば，docker-compoes.ymlより該当コンテナを削除する．
+
+:8081にアクセスすることで利用可能．
+
 ## Laravel License
 
 LaravelのフレームワークはMITライセンスのオープンソースソフトウェアです．

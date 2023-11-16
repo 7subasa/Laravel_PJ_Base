@@ -1,6 +1,15 @@
 # PHPとApacheのイメージ
 FROM php:8.2-apache
 
+# 必須ライブラリのinstall
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    libzip-dev \
+    && docker-php-ext-install pdo pdo_mysql mysqli mbstring
+
 # PHPの拡張機能install
 RUN docker-php-ext-install pdo pdo_mysql mysqli mbstring
 
