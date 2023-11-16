@@ -1,0 +1,48 @@
+version: '3.8'
+services:
+  # アプリケーション用コンテナ
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # image, container_nameを作成するPJに合わせて変更
+    image: laravel_pj_base
+    container_name: laravel_pj_base
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+  # DB用コンテナ
+  db:
+    image: mysql:5.7
+    # container_nameを作成するPJに合わせて変更
+    container_name: laravel_pj_base_mysql
+    # environmentを作成するPJに合わせて変更
+    environment:
+      MYSQL_DATABASE: laravel_pj_base
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  # phpmyadmin用コンテナ - mysqlをwebから操作できる
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    # container_nameを作成するPJに合わせて変更
+    container_name: laravel_pj_base_phpmyadmin
+    environment:
+      PMA_HOST: db
+      #DBコンテナのenvironmentに合わせて変更
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+
+volumes:
+  dbdata:
