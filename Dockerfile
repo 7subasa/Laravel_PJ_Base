@@ -10,6 +10,11 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     && docker-php-ext-install pdo pdo_mysql mysqli mbstring
 
+# Composerのインストール
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
+    && php -r "unlink('composer-setup.php');"
+
 # PHPの拡張機能install
 RUN docker-php-ext-install pdo pdo_mysql mysqli mbstring
 

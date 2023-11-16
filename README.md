@@ -21,6 +21,7 @@
     - Dockerコンテナの起動
         以下のコマンドでコンテナ起動
         ```
+            composer install
             docker-compose up -d
         ```
 3. Laravel 初回セットアップ
